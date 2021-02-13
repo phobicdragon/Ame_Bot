@@ -20,11 +20,11 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/phobicdragon/ameBOT.git"
+    "url": "git+https://github.com/phobicdragon/Ame_Bot.git"
   },
   "bugs": {
-    "url": "https://github.com/phobicdragon/ameBOT/issues"
+    "url": "https://github.com/phobicdragon/Ame_Bot/issues"
   },
-  "homepage": "https://github.com/phobicdragon/ameBOT#readme",
+  "homepage": "https://github.com/phobicdragon/Ame_Bot#readme",
   "description": ""
 }
