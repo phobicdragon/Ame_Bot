@@ -1,0 +1,30 @@
+{
+  "name": "ameBotDirectory",
+  "version": "1.0.0",
+  "main": "ameBot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ameBot.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.5.1",
+    "dotenv": "^8.2.0"
+  },
+  "engines": {
+    "node": "14.15.4",
+    "npm": "*"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phobicdragon/ameBOT.git"
+  },
+  "bugs": {
+    "url": "https://github.com/phobicdragon/ameBOT/issues"
+  },
+  "homepage": "https://github.com/phobicdragon/ameBOT#readme",
+  "description": ""
+}
