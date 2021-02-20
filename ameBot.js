@@ -33,12 +33,6 @@ client.on('message', async message => {
 		} else {
 			message.channel.send(getRandomQuote(),getRandomPic()).catch(console.error);
 		}
-
-	if (message.content.startsWith(randomPicPrefix)) {
-		let imgId = Math.floor(Math.random() * pictureList.length);
-		let imgName = pictureList[imgId];
-		let attachment = new Discord.MessageAttachment('./amePics/'+imgName, ''+imgName);
-		message.channel.send(attachment).catch(console.error);
 	}
 });
 
