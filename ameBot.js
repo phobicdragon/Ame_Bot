@@ -22,8 +22,7 @@ client.on('message', async message => {
 		let imgId = Math.floor(Math.random() * pictureList.length);
 		let imgName = pictureList[imgId];
 		let attachment = new Discord.MessageAttachment('./amePics/'+imgName, ''+imgName);
-		let embed = new Discord.MessageEmbed().attachFiles(attachment).setImage('attachment://'+imgName);
-		message.channel.send(embed).catch(console.error);
+		message.channel.send(attachment).catch(console.error);
 	}
 });
 
