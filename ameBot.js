@@ -7,10 +7,15 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 
 //Data for bot operations
-const pictureList = fs.readdirSync('./amePics');
+const picDirPath = './amePics';
+const quoteFilePath = './ameQuotes.txt';
+const pictureList = fs.readdirSync(picDirPath);
+const quoteList = fs.readFileSync(quoteFilePath).toString('utf-8').split('\n');
 
-//Prefixes for bot commands
-const randomPicPrefix = '!ame';
+//Message parameters for bot commands
+const botCalloutPrefix = '!ame';
+const randomMessageCommand = 'speak';
+const randomPicCommand = 'pic';
 
 //Bot Logic
 client.once('ready', () => {
@@ -18,17 +23,39 @@ client.once('ready', () => {
 });
 
 client.on('message', async message => {
-	if (message.content.startsWith(randomPicPrefix)) {
-		let imgId = Math.floor(Math.random() * pictureList.length);
-		let imgName = pictureList[imgId];
-		let attachment = new Discord.MessageAttachment('./amePics/'+imgName, ''+imgName);
-		let embed = new Discord.MessageEmbed().attachFiles(attachment).setImage('attachment://'+imgName);
-		message.channel.send(embed).catch(console.error);
+	let msgContent = message.content;
+	if (msgContent.startsWith(botCalloutPrefix)) {
+		let resp;
+		if(msgContent.includes(randomMessageCommand)) {
+			message.channel.send(getRandomQuote()).catch(console.error);
+		} else if(msgContent.includes(randomPicCommand)) {
+			message.channel.send(getRandomPic()).catch(console.error);
+		} else {
+			message.channel.send(getRandomQuote(),getRandomPic()).catch(console.error);
+		}
 	}
 });
+
 
 client.on('error', () => {
 	console.log(client.error);
 });
 
 client.login(); //Don't input token, handled by host
+
+//Helper functions
+function getRandomPic() {
+	let imgId = Math.floor(Math.random() * pictureList.length);
+	let imgName = pictureList[imgId];
+	let attachment = new Discord.MessageAttachment(getImageFilePath(imgName), imgName);
+	return attachment;
+}
+
+function getRandomQuote() {
+	let qtID = Math.floor(Math.random() * quoteList.length);
+	return quoteList[qtID];
+}
+
+function getImageFilePath(imgName) {
+	return picDirPath+'/'+imgName;
+}
