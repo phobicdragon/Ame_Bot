@@ -17,19 +17,32 @@ const botCalloutPrefix = '!ame';
 const randomMessageCommand = 'speak';
 const randomPicCommand = 'pic';
 
+//Bot Error Responses
+const unrecognizedParameter = 'I don\'t know what you mean by this, you bozo: ';
+
 //Bot Logic
 client.once('ready', () => {
 	console.log('Ame online');
 });
 
 client.on('message', async message => {
-	let msgContent = message.content;
-	if (msgContent.startsWith(botCalloutPrefix)) {
-		let resp;
-		if(msgContent.includes(randomMessageCommand)) {
-			message.channel.send(getRandomQuote()).catch(console.error);
-		} else if(msgContent.includes(randomPicCommand)) {
-			message.channel.send(getRandomPic()).catch(console.error);
+	let msgContent = message.content.trim().split(/\s+/g);
+	
+	if (msgContent[0] == botCalloutPrefix) {
+		if(msgContent.length > 1) {
+			let msgParam = msgContent[1];
+			
+			switch(msgParam) {
+				case randomMessageCommand:
+					message.channel.send(getRandomQuote()).catch(console.error);
+					break;
+				case randomPicCommand:
+					message.channel.send(getRandomPic()).catch(console.error);
+					break;
+				default:
+					message.channel.send(unrecognizedParameter+msgParam).catch(console.error);
+			}
+			
 		} else {
 			message.channel.send(getRandomQuote(),getRandomPic()).catch(console.error);
 		}
